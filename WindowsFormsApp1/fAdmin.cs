@@ -44,7 +44,6 @@ namespace WindowsFormsApp1
             txbPTID.DataBindings.Add(new Binding("Text", dtgvPT.DataSource, "id", true, DataSourceUpdateMode.Never));
             txbPTName.DataBindings.Add(new Binding("Text", dtgvPT.DataSource, "tenphutung", true, DataSourceUpdateMode.Never));
             txbPrice.DataBindings.Add(new Binding("Text", dtgvPT.DataSource, "price", true, DataSourceUpdateMode.Never));
-            txbsoluong.DataBindings.Add(new Binding("Text", dtgvPT.DataSource, "count", true, DataSourceUpdateMode.Never));
         }
 
         List<PhuTung> SearchPhuTungByName(string name)
@@ -59,9 +58,8 @@ namespace WindowsFormsApp1
             string name = txbPTName.Text;
             int idhangxe = (cbHangPT.SelectedItem as HangXe).Id;
             float price = float.Parse(txbPrice.Text);
-            int soluong = Convert.ToInt32(txbsoluong.Text);
 
-            if (PhuTungDAO.Instance.InsertPhuTung(name, idhangxe, soluong, price))
+            if (PhuTungDAO.Instance.InsertPhuTung(name, idhangxe, price))
             {
                 MessageBox.Show("Thêm phụ tùng thành công");
                 LoadListPhuTung();
@@ -96,10 +94,9 @@ namespace WindowsFormsApp1
             string name = txbPTName.Text;
             int idhangxe = (cbHangPT.SelectedItem as HangXe).Id;
             float price = float.Parse(txbPrice.Text);
-            int soluong = Convert.ToInt32(txbsoluong.Text);
             int id = Convert.ToInt32(txbPTID.Text);
 
-            if (PhuTungDAO.Instance.UpdatePhuTung(name, idhangxe, soluong, price, id))
+            if (PhuTungDAO.Instance.UpdatePhuTung(name, idhangxe, price, id))
             {
                 MessageBox.Show("Sửa phụ tùng thành công");
                 LoadListPhuTung();

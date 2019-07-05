@@ -41,9 +41,6 @@
             this.txbSearchPT = new System.Windows.Forms.TextBox();
             this.btnSearchPT = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.txbsoluong = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.txbPrice = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -63,7 +60,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtgvPT)).BeginInit();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel24.SuspendLayout();
@@ -193,7 +189,6 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.panel5);
             this.panel3.Controls.Add(this.panel2);
             this.panel3.Controls.Add(this.panel6);
             this.panel3.Controls.Add(this.panel24);
@@ -202,32 +197,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(292, 335);
             this.panel3.TabIndex = 6;
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.txbsoluong);
-            this.panel5.Controls.Add(this.label3);
-            this.panel5.Location = new System.Drawing.Point(4, 196);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(285, 42);
-            this.panel5.TabIndex = 8;
-            // 
-            // txbsoluong
-            // 
-            this.txbsoluong.Location = new System.Drawing.Point(102, 12);
-            this.txbsoluong.Name = "txbsoluong";
-            this.txbsoluong.Size = new System.Drawing.Size(167, 20);
-            this.txbsoluong.TabIndex = 1;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(1, 13);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 19);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Số lượng :";
             // 
             // panel2
             // 
@@ -362,8 +331,6 @@
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel6.ResumeLayout(false);
@@ -400,9 +367,6 @@
         private System.Windows.Forms.TextBox txbPTID;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DataGridView dtgvPT;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.TextBox txbsoluong;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox txbPrice;
         private System.Windows.Forms.Label label1;

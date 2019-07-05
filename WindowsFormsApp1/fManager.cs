@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1.DAO;
 using WindowsFormsApp1.DTO;
+using System.Globalization;
+using System.Threading;
+using System.Threading.Tasks;
+
 
 namespace WindowsFormsApp1
 {
@@ -25,10 +29,12 @@ namespace WindowsFormsApp1
             LoadHangXeIntoCombobox(cbHangXe);
             LoadArea();
             LoadListKhachHang();
+            LoadListPhuTung();
         }
 
         void LoadArea()
         {
+            flp.Controls.Clear();
             List<Area> arealist = AreaDAO.Instance.LoadArealist();
 
             foreach (Area item in arealist)
@@ -47,32 +53,36 @@ namespace WindowsFormsApp1
                         break;
                 }
 
-                flpArea.Controls.Add(btn);
+                flp.Controls.Add(btn);
             }
+        }
+
+        void ShowBill(int id)
+        {
+            lsv.Items.Clear();
+            List<WindowsFormsApp1.DTO.Menu> listBillInfo = MenuDAO.Instance.GetListMenuByTable(id);
+            float totalPrice = 0;
+            foreach (WindowsFormsApp1.DTO.Menu item in listBillInfo)
+            {
+                ListViewItem lsvItem = new ListViewItem(item.Tenphutung.ToString());
+                lsvItem.SubItems.Add(item.Count.ToString());
+                lsvItem.SubItems.Add(item.Price.ToString());
+                lsvItem.SubItems.Add(item.TotalPrice.ToString());
+                totalPrice += item.TotalPrice;
+
+                lsv.Items.Add(lsvItem);
+            }
+            CultureInfo culture = new CultureInfo("vi-VN");
+            Thread.CurrentThread.CurrentCulture = culture;
+
+            txbTotalPrice.Text = totalPrice.ToString("c", culture);
         }
 
         void btn_Click(object sender, EventArgs e)
         {
-            int areaid = ((sender as Button).Tag as Area).Id;
-            textBox1.Text = areaid.ToString();
-        }
-
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            int id = Convert.ToInt32(textBox1.Text);
-            Area area = AreaDAO.Instance.GetStatusById(id);
-            if (area.Status != "Empty")
-            {
-                MessageBox.Show("Khu vực này đang dược sử dụng");
-            }
-            else
-            {
-                AreaDAO.Instance.UpdateStatus1(id);
-                flpArea.Controls.Clear();
-                LoadArea();
-            }
-
-                
+            int areaID = ((sender as Button).Tag as Area).Id;
+            lsv.Tag = (sender as Button).Tag;
+            ShowBill(areaID);
         }
 
         void LoadListKhachHang()
@@ -93,17 +103,20 @@ namespace WindowsFormsApp1
             f.ShowDialog();
         }
 
-        void KhuToolStripMenuItem_Click(object sender, EventArgs e)
+        void LoadListPhuTung()
         {
-
+            List<PhuTung> list = PhuTungDAO.Instance.GetListPhuTung();
+            cbFood.DataSource = list;
+            cbFood.DisplayMember = "Tenphutung";
         }
+ 
 
         private void TabPage1_Click(object sender, EventArgs e)
         {
 
         }
 
-        List<KhachHang> SearchKhacHangByName(string name)
+            List<KhachHang> SearchKhacHangByName(string name)
         {
             List<KhachHang> listKhachHang = KhachHangDAO.Instance.SearchKhachHangByName(name);
 
@@ -171,5 +184,34 @@ namespace WindowsFormsApp1
             dataGridView1.DataSource = SearchKhacHangByName(txbSearchKH.Text);
         }
 
+        private void Button2_Click(object sender, EventArgs e)
+            {
+                Area area = lsv.Tag as Area;
+
+                if (area == null)
+                {
+                    MessageBox.Show("Hãy chọn bàn");
+                    return;
+                }
+
+                int idHoaDon = BillDAO.Instance.GetUncheckBillIDByTableID(area.Id);
+                int idPhuTung = (cbFood.SelectedItem as PhuTung).Id;
+                int count = (int)nmr.Value;
+
+                if (idHoaDon == -1)
+                {
+                    BillDAO.Instance.InsertBill(area.Id);
+                    BillInfoDAO.Instance.InsertBillInfo(BillDAO.Instance.GetMaxIDBill(), idPhuTung, count);
+                }
+                else
+                {
+                    BillInfoDAO.Instance.InsertBillInfo(idHoaDon, idPhuTung, count);
+                }
+
+                ShowBill(area.Id);
+
+                LoadArea();
+            }
+        
     }
 }

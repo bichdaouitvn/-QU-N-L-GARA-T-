@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using WindowsFormsApp1.DTO;
 
 namespace WindowsFormsApp1.DAO
 {
@@ -18,7 +20,29 @@ namespace WindowsFormsApp1.DAO
 
         private BillInfoDAO() { }
 
+        public void DeleteBillInfoByFoodID(int id)
+        {
+            DataProvider.Instance.ExecuteQuery("delete dbo.BillInfo WHERE idFood = " + id);
+        }
+        public List<BillInfo> GetListBillInfo(int id)
+        {
+            List<BillInfo> listBillInfo = new List<BillInfo>();
 
+            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.ThongTinHoaDon WHERE idBill = " + id);
+
+            foreach (DataRow item in data.Rows)
+            {
+                BillInfo info = new BillInfo(item);
+                listBillInfo.Add(info);
+            }
+
+            return listBillInfo;
+        }
+
+        public void InsertBillInfo(int idHoaDon, int idPhuTung, int count)
+        {
+            DataProvider.Instance.ExecuteNonQuery("USP_InsertBillInfo @idHoaDon , @idPhutung , @count", new object[] { idHoaDon, idPhuTung, count });
+        }
     }
 
 }

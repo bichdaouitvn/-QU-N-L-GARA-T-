@@ -33,7 +33,13 @@
             this.thôngTinTàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.flpArea = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.txbSearchKH = new System.Windows.Forms.TextBox();
+            this.btnSearchPT = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnShowPT = new System.Windows.Forms.Button();
+            this.btnAddPT = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
             this.textBox7 = new System.Windows.Forms.TextBox();
@@ -54,20 +60,23 @@
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btnAddPT = new System.Windows.Forms.Button();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.txbSearchKH = new System.Windows.Forms.TextBox();
-            this.btnSearchPT = new System.Windows.Forms.Button();
+            this.nmr = new System.Windows.Forms.NumericUpDown();
+            this.lsv = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.flp = new System.Windows.Forms.FlowLayoutPanel();
+            this.txbTotalPrice = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.btnShowPT = new System.Windows.Forms.Button();
+            this.cbFood = new System.Windows.Forms.ComboBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel8.SuspendLayout();
             this.panel10.SuspendLayout();
             this.panel11.SuspendLayout();
@@ -75,10 +84,8 @@
             this.panel13.SuspendLayout();
             this.panel14.SuspendLayout();
             this.panel15.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.panel2.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmr)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -117,12 +124,9 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.panel4);
             this.tabPage1.Controls.Add(this.panel2);
             this.tabPage1.Controls.Add(this.dataGridView1);
-            this.tabPage1.Controls.Add(this.flpArea);
-            this.tabPage1.Controls.Add(this.panel1);
             this.tabPage1.Controls.Add(this.panel8);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -133,13 +137,68 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.TabPage1_Click);
             // 
-            // flpArea
+            // panel4
             // 
-            this.flpArea.AutoScroll = true;
-            this.flpArea.Location = new System.Drawing.Point(503, 3);
-            this.flpArea.Name = "flpArea";
-            this.flpArea.Size = new System.Drawing.Size(657, 244);
-            this.flpArea.TabIndex = 3;
+            this.panel4.Controls.Add(this.txbSearchKH);
+            this.panel4.Controls.Add(this.btnSearchPT);
+            this.panel4.Location = new System.Drawing.Point(3, 414);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(292, 62);
+            this.panel4.TabIndex = 8;
+            // 
+            // txbSearchKH
+            // 
+            this.txbSearchKH.Location = new System.Drawing.Point(4, 17);
+            this.txbSearchKH.Name = "txbSearchKH";
+            this.txbSearchKH.Size = new System.Drawing.Size(176, 20);
+            this.txbSearchKH.TabIndex = 2;
+            // 
+            // btnSearchPT
+            // 
+            this.btnSearchPT.Location = new System.Drawing.Point(186, 5);
+            this.btnSearchPT.Name = "btnSearchPT";
+            this.btnSearchPT.Size = new System.Drawing.Size(75, 47);
+            this.btnSearchPT.TabIndex = 1;
+            this.btnSearchPT.Text = "Tìm Kiếm";
+            this.btnSearchPT.UseVisualStyleBackColor = true;
+            this.btnSearchPT.Click += new System.EventHandler(this.BtnSearchPT_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.btnShowPT);
+            this.panel2.Controls.Add(this.btnAddPT);
+            this.panel2.Location = new System.Drawing.Point(3, 346);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(358, 62);
+            this.panel2.TabIndex = 5;
+            // 
+            // btnShowPT
+            // 
+            this.btnShowPT.Location = new System.Drawing.Point(84, 4);
+            this.btnShowPT.Name = "btnShowPT";
+            this.btnShowPT.Size = new System.Drawing.Size(75, 47);
+            this.btnShowPT.TabIndex = 3;
+            this.btnShowPT.Text = "Xem";
+            this.btnShowPT.UseVisualStyleBackColor = true;
+            this.btnShowPT.Click += new System.EventHandler(this.BtnShowPT_Click);
+            // 
+            // btnAddPT
+            // 
+            this.btnAddPT.Location = new System.Drawing.Point(3, 4);
+            this.btnAddPT.Name = "btnAddPT";
+            this.btnAddPT.Size = new System.Drawing.Size(75, 47);
+            this.btnAddPT.TabIndex = 0;
+            this.btnAddPT.Text = "Thêm";
+            this.btnAddPT.UseVisualStyleBackColor = true;
+            this.btnAddPT.Click += new System.EventHandler(this.BtnAddPT_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(367, 3);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(793, 559);
+            this.dataGridView1.TabIndex = 10;
             // 
             // panel8
             // 
@@ -313,113 +372,101 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button2);
+            this.tabPage2.Controls.Add(this.cbFood);
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.txbTotalPrice);
+            this.tabPage2.Controls.Add(this.nmr);
+            this.tabPage2.Controls.Add(this.lsv);
+            this.tabPage2.Controls.Add(this.flp);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(945, 508);
+            this.tabPage2.Size = new System.Drawing.Size(1163, 568);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Khu sửa chữa";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // nmr
             // 
-            this.panel1.Controls.Add(this.textBox1);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(367, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(130, 42);
-            this.panel1.TabIndex = 9;
+            this.nmr.Location = new System.Drawing.Point(1035, 3);
+            this.nmr.Name = "nmr";
+            this.nmr.Size = new System.Drawing.Size(120, 20);
+            this.nmr.TabIndex = 2;
             // 
-            // textBox1
+            // lsv
             // 
-            this.textBox1.Location = new System.Drawing.Point(61, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(53, 20);
-            this.textBox1.TabIndex = 1;
+            this.lsv.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4});
+            this.lsv.GridLines = true;
+            this.lsv.Location = new System.Drawing.Point(566, 70);
+            this.lsv.Name = "lsv";
+            this.lsv.Size = new System.Drawing.Size(591, 416);
+            this.lsv.TabIndex = 1;
+            this.lsv.UseCompatibleStateImageBehavior = false;
+            this.lsv.View = System.Windows.Forms.View.Details;
             // 
-            // label1
+            // columnHeader1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 19);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Khu :";
+            this.columnHeader1.Text = "Tên phụ tùng";
             // 
-            // dataGridView1
+            // columnHeader2
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(367, 292);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(793, 270);
-            this.dataGridView1.TabIndex = 10;
+            this.columnHeader2.Text = "Số lượng";
             // 
-            // panel2
+            // columnHeader3
             // 
-            this.panel2.Controls.Add(this.btnShowPT);
-            this.panel2.Controls.Add(this.btnAddPT);
-            this.panel2.Location = new System.Drawing.Point(3, 346);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(358, 62);
-            this.panel2.TabIndex = 5;
+            this.columnHeader3.Text = "Đơn giá";
             // 
-            // btnAddPT
+            // columnHeader4
             // 
-            this.btnAddPT.Location = new System.Drawing.Point(3, 4);
-            this.btnAddPT.Name = "btnAddPT";
-            this.btnAddPT.Size = new System.Drawing.Size(75, 47);
-            this.btnAddPT.TabIndex = 0;
-            this.btnAddPT.Text = "Thêm";
-            this.btnAddPT.UseVisualStyleBackColor = true;
-            this.btnAddPT.Click += new System.EventHandler(this.BtnAddPT_Click);
+            this.columnHeader4.Text = "Thành tiền";
+            this.columnHeader4.Width = 80;
             // 
-            // panel4
+            // flp
             // 
-            this.panel4.Controls.Add(this.txbSearchKH);
-            this.panel4.Controls.Add(this.btnSearchPT);
-            this.panel4.Location = new System.Drawing.Point(3, 414);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(292, 62);
-            this.panel4.TabIndex = 8;
+            this.flp.Location = new System.Drawing.Point(0, 3);
+            this.flp.Name = "flp";
+            this.flp.Size = new System.Drawing.Size(554, 559);
+            this.flp.TabIndex = 0;
             // 
-            // txbSearchKH
+            // txbTotalPrice
             // 
-            this.txbSearchKH.Location = new System.Drawing.Point(4, 17);
-            this.txbSearchKH.Name = "txbSearchKH";
-            this.txbSearchKH.Size = new System.Drawing.Size(176, 20);
-            this.txbSearchKH.TabIndex = 2;
-            // 
-            // btnSearchPT
-            // 
-            this.btnSearchPT.Location = new System.Drawing.Point(186, 5);
-            this.btnSearchPT.Name = "btnSearchPT";
-            this.btnSearchPT.Size = new System.Drawing.Size(75, 47);
-            this.btnSearchPT.TabIndex = 1;
-            this.btnSearchPT.Text = "Tìm Kiếm";
-            this.btnSearchPT.UseVisualStyleBackColor = true;
-            this.btnSearchPT.Click += new System.EventHandler(this.BtnSearchPT_Click);
+            this.txbTotalPrice.Location = new System.Drawing.Point(912, 518);
+            this.txbTotalPrice.Name = "txbTotalPrice";
+            this.txbTotalPrice.ReadOnly = true;
+            this.txbTotalPrice.Size = new System.Drawing.Size(123, 20);
+            this.txbTotalPrice.TabIndex = 3;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(367, 54);
+            this.button1.Location = new System.Drawing.Point(1041, 492);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(130, 47);
+            this.button1.Size = new System.Drawing.Size(116, 70);
             this.button1.TabIndex = 4;
-            this.button1.Text = "Chọn khu";
+            this.button1.Text = "Thanh toán";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
-            // btnShowPT
+            // cbFood
             // 
-            this.btnShowPT.Location = new System.Drawing.Point(84, 4);
-            this.btnShowPT.Name = "btnShowPT";
-            this.btnShowPT.Size = new System.Drawing.Size(75, 47);
-            this.btnShowPT.TabIndex = 3;
-            this.btnShowPT.Text = "Xem";
-            this.btnShowPT.UseVisualStyleBackColor = true;
-            this.btnShowPT.Click += new System.EventHandler(this.BtnShowPT_Click);
+            this.cbFood.FormattingEnabled = true;
+            this.cbFood.Location = new System.Drawing.Point(580, 3);
+            this.cbFood.Name = "cbFood";
+            this.cbFood.Size = new System.Drawing.Size(121, 21);
+            this.cbFood.TabIndex = 5;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(789, 3);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(110, 42);
+            this.button2.TabIndex = 6;
+            this.button2.Text = "Thêm";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // fManager
             // 
@@ -435,6 +482,10 @@
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
@@ -448,12 +499,9 @@
             this.panel14.PerformLayout();
             this.panel15.ResumeLayout(false);
             this.panel15.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmr)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -486,17 +534,23 @@
         private System.Windows.Forms.TextBox textBox11;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.FlowLayoutPanel flpArea;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnAddPT;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TextBox txbSearchKH;
         private System.Windows.Forms.Button btnSearchPT;
         private System.Windows.Forms.Button btnShowPT;
+        private System.Windows.Forms.NumericUpDown nmr;
+        private System.Windows.Forms.ListView lsv;
+        private System.Windows.Forms.FlowLayoutPanel flp;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txbTotalPrice;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ComboBox cbFood;
     }
 }

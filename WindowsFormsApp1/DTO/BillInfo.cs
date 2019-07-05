@@ -9,76 +9,29 @@ namespace WindowsFormsApp1.DTO
 {
     public class BillInfo
     {
-        public BillInfo(int id, int billID, int foodId, int count)
+        public BillInfo(int id, int billID, int idPhuTung, int count)
         {
-            this.ID = id;
+            this.Id = id;
             this.BillID = billID;
-            this.FoodID = foodID;
+            this.IdPhuTung = idPhuTung;
             this.Count = count;
         }
 
         public BillInfo(DataRow row)
         {
-            this.ID = (int)row["id"];
-            this.BillID = (int)row["idbill"];
-            this.FoodID = (int)row["idfood"];
+            this.Id = (int)row["id"];
+            this.BillID = (int)row["idHoaDon"];
+            this.IdPhuTung = (int)row["idPhuTung"];
             this.Count = (int)row["count"];
         }
         private int count;
-        private int foodID;
+        private int idPhuTung;
         private int billID;
-        private int iD;
+        private int id;
 
-        public int BillID
-        {
-            get
-            {
-                return billID;
-            }
-
-            set
-            {
-                billID = value;
-            }
-        }
-
-        public int ID
-        {
-            get
-            {
-                return iD;
-            }
-
-            set
-            {
-                iD = value;
-            }
-        }
-
-        public int FoodID
-        {
-            get
-            {
-                return foodID;
-            }
-
-            set
-            {
-                foodID = value;
-            }
-        }
-
-        public int Count
-        {
-            get
-            {
-                return count;
-            }
-
-            set
-            {
-                count = value;
-            }
-        }
+        public int Count { get => count; set => count = value; }
+        public int IdPhuTung { get => idPhuTung; set => idPhuTung = value; }
+        public int BillID { get => billID; set => billID = value; }
+        public int Id { get => id; set => id = value; }
     }
 }

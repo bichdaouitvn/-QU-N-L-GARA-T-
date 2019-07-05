@@ -1,4 +1,4 @@
-create database garage					
+﻿create database garage					
 go
 
 use  garage
@@ -40,7 +40,6 @@ CREATE TABLE PhuTung
 	id INT IDENTITY PRIMARY KEY,
 	tenphutung NVARCHAR (100),
 	idHangXe INT NOT NULL,
-	count INT NOT NULL DEFAULT 0,
 	price FLOAT
 	
 	FOREIGN KEY (idHangXe) REFERENCES dbo.HangXe(id)
@@ -51,7 +50,7 @@ CREATE TABLE KhuSuaChua
 (
 	id INT IDENTITY PRIMARY KEY,
 	name NVARCHAR(100) NOT NULL DEFAULT N'Insert name',
-	status NVARCHAR(100) NOT NULL DEFAULT N'Empty'	-- trong || dang lam viec
+	status NVARCHAR(100) NOT NULL DEFAULT N'Empty'	-- 0:trong || 1:dang lam viec
 )
 
 CREATE TABLE HoaDon 	
@@ -60,11 +59,9 @@ CREATE TABLE HoaDon
 	DateCheckIn DATE NOT NULL DEFAULT GETDATE(),
 	DateCheckOut DATE,
 	idKhuSuaChua INT NOT NULL,
-	idKhachHang int NOT NULL,
 	status INT NOT NULL DEFAULT 0 -- 1: da thanh toan && 0: chua thanh toan
 	
 	FOREIGN KEY (idKhuSuaChua) REFERENCES dbo.KhuSuaChua(id),
-	FOREIGN KEY (idKhachHang) REFERENCES dbo.KhachHang(id)
 )
 
 CREATE TABLE ThongTinHoaDon
@@ -129,3 +126,93 @@ GO
 DELETE FROM KhachHang
 DELETE FROM Xe
 
+INSERT	dbo.HoaDon
+        ( DateCheckIn ,
+          DateCheckOut ,
+          idKhuSuaChua ,
+          status
+        )
+VALUES  ( GETDATE() , -- DateCheckIn - date
+          NULL , -- DateCheckOut - date
+          1, -- idTable - int
+          0  -- status - int
+        )
+INSERT	dbo.HoaDon
+        ( DateCheckIn ,
+          DateCheckOut ,
+          idKhuSuaChua ,
+          status
+        )
+VALUES  ( GETDATE() , -- DateCheckIn - date
+          NULL , -- DateCheckOut - date
+          2, -- idTable - int
+          0  -- status - int
+        )
+
+INSERT	dbo.ThongTinHoaDon
+        ( idHoaDon, idPhuTung, count )
+VALUES  ( 1, -- idBill - int
+          1, -- idFood - int
+          2  -- count - int
+          )
+INSERT	dbo.ThongTinHoaDon
+        ( idHoaDon, idPhuTung, count )
+VALUES  ( 2, -- idBill - int
+          2, -- idFood - int
+          3  -- count - int
+          )
+
+SELECT f.tenphutung, bi.count, f.price, f.price*bi.count AS totalPrice 
+FROM dbo.ThongTinHoaDon AS bi, dbo.HoaDon AS b, dbo.PhuTung AS f 
+WHERE bi.idHoaDon = b.id AND bi.idPhuTung = f.id AND b.status = 0 AND b.idKhuSuaChua = 1
+go
+
+CREATE PROC [dbo].[USP_InsertBill]
+@idArea INT
+AS
+BEGIN
+	INSERT dbo.HoaDon
+	        ( DateCheckIn ,
+	          DateCheckOut ,
+	          idKhuSuaChua ,
+	          status	   
+	        )
+	VALUES  ( GETDATE() , -- DateCheckIn - date
+	          NULL , -- DateCheckOut - date
+	          @idArea , -- idTable - int
+	          0  -- status - int
+	        )
+END
+GO
+
+CREATE PROC [dbo].[USP_InsertBillInfo]
+@idHoaDon INT, @idPhutung INT, @count INT
+AS
+BEGIN
+
+	DECLARE @isExitsBillInfo INT
+	DECLARE @phutungCount INT = 1
+	
+	SELECT @isExitsBillInfo = id, @phutungCount = b.count 
+	FROM dbo.ThongTinHoaDon AS b 
+	WHERE idHoaDon = @idHoaDon AND idPhuTung = @idPhutung
+
+	IF (@isExitsBillInfo > 0)
+	BEGIN
+		DECLARE @newCount INT = @phutungCount + @count
+		IF (@newCount > 0)
+			UPDATE dbo.ThongTinHoaDon SET count = @phutungCount + @count WHERE idPhuTung = @idPhutung
+		ELSE
+			DELETE dbo.ThongTinHoaDon WHERE idHoaDon = @idHoaDon AND idPhuTung = @idPhutung
+	END
+	ELSE
+	BEGIN
+		INSERT	dbo.ThongTinHoaDon
+        ( idHoaDon, idPhuTung, count )
+		VALUES  ( @idHoaDon, -- idBill - int
+          @idPhutung, -- idFood - int
+          @count  -- count - int
+          )
+	END
+END
+GO
