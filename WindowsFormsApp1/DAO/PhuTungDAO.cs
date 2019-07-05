@@ -36,6 +36,22 @@ namespace WindowsFormsApp1.DAO
             return list;
         }
 
+        public List<PhuTung> SearchPhuTungByName(string name)
+        {
+            List<PhuTung> list = new List<PhuTung>();
+
+            string query = string.Format("SELECT * FROM PhuTung where tenphutung like N'%{0}%'", name);
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+            foreach (DataRow item in data.Rows)
+            {
+                PhuTung PhuTung = new PhuTung(item);
+                list.Add(PhuTung);
+            }
+
+            return list;
+        }
+
         public bool InsertPhuTung(string name, int id, int soluong, float gia)
         {
             string query = string.Format("INSERT dbo.PhuTung ( tenphutung, idHangXe, count, price)VALUES  ( N'{0}', {1}, {2}, {3})", name, id, soluong, gia);

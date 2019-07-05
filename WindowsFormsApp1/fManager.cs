@@ -23,6 +23,62 @@ namespace WindowsFormsApp1
         void LoadData()
         {
             LoadHangXeIntoCombobox(cbHangXe);
+            LoadArea();
+            LoadListKhachHang();
+        }
+
+        void LoadArea()
+        {
+            List<Area> arealist = AreaDAO.Instance.LoadArealist();
+
+            foreach (Area item in arealist)
+            {
+                Button btn = new Button() { Width = AreaDAO.AreaWeight, Height = AreaDAO.AreaHeight };
+                btn.Text = item.Name + Environment.NewLine + item.Status;
+                btn.Click += btn_Click;
+                btn.Tag = item;
+                switch(item.Status)
+                {
+                    case "Empty":
+                        btn.BackColor = Color.Azure;
+                        break;
+                    default:
+                        btn.BackColor = Color.Orchid;
+                        break;
+                }
+
+                flpArea.Controls.Add(btn);
+            }
+        }
+
+        void btn_Click(object sender, EventArgs e)
+        {
+            int areaid = ((sender as Button).Tag as Area).Id;
+            textBox1.Text = areaid.ToString();
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(textBox1.Text);
+            Area area = AreaDAO.Instance.GetStatusById(id);
+            if (area.Status != "Empty")
+            {
+                MessageBox.Show("Khu vực này đang dược sử dụng");
+            }
+            else
+            {
+                AreaDAO.Instance.UpdateStatus1(id);
+                flpArea.Controls.Clear();
+                LoadArea();
+            }
+
+                
+        }
+
+        void LoadListKhachHang()
+        {
+            string query = "SELECT KhachHang.hoten as N'Họ tên', KhachHang.diachi as N'Địa chỉ', KhachHang.sodienthoai as N'Số điện thoại', Xe.tenxe as N'Tên xe', Xe.biensoxe as N'Biển số xe', HangXe.tenhangxe as N'Hãng xe' FROM[dbo].[KhachHang] inner join[dbo].[Xe] on KhachHang.idXe = Xe.id inner join[dbo].[HangXe] on Xe.idHangXe = HangXe.id WHERE KhachHang.status =0";
+            dataGridView1.DataSource = DataProvider.Instance.ExecuteQuery(query);
         }
 
         void LoadHangXeIntoCombobox(ComboBox cb)
@@ -31,12 +87,89 @@ namespace WindowsFormsApp1
             cb.DisplayMember = "Tenhangxe";
         }
 
-        private void AdminToolStripMenuItem_Click(object sender, EventArgs e)
+        void AdminToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fAdmin f = new fAdmin();
             f.ShowDialog();
         }
 
-  
+        void KhuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        List<KhachHang> SearchKhacHangByName(string name)
+        {
+            List<KhachHang> listKhachHang = KhachHangDAO.Instance.SearchKhachHangByName(name);
+
+            return listKhachHang;
+        }
+
+        private void BtnAddPT_Click(object sender, EventArgs e)
+        {
+            string tenxe = textBox11.Text;
+            string bienso = textBox10.Text;
+            int idhangxe = (cbHangXe.SelectedItem as HangXe).Id;
+            string tenkh = textBox9.Text;
+            string sdt = textBox8.Text;
+            string diachi = textBox7.Text;
+
+            if (XeDAO.Instance.InsertXe(tenxe, idhangxe, bienso))
+            {
+               
+                MessageBox.Show("Thêm xe thành công");
+                if (insertXe != null)
+                    insertXe(this, new EventArgs());
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi khi thêm xe");
+            }
+
+            Xe xe = XeDAO.Instance.Getidxebybienso(bienso);
+            if (KhachHangDAO.Instance.InsertKhachHang(tenkh, sdt, diachi, xe.Id))
+            {
+                LoadListKhachHang();
+                MessageBox.Show("Thêm khách hàng thành công");
+                if (insertKhachHang != null)
+                    insertKhachHang(this, new EventArgs());
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi khi thêm khách hàng");
+            }
+
+
+        }
+
+        private event EventHandler insertXe;
+        public event EventHandler Insertxe
+        {
+            add { insertXe += value; }
+            remove { insertXe -= value; }
+        }
+
+        private event EventHandler insertKhachHang;
+        public event EventHandler InsertKhachHang
+        {
+            add { insertKhachHang+= value; }
+            remove { insertKhachHang -= value; }
+        }
+
+        private void BtnShowPT_Click(object sender, EventArgs e)
+        {
+            LoadListKhachHang();
+        }
+
+        private void BtnSearchPT_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = SearchKhacHangByName(txbSearchKH.Text);
+        }
+
     }
 }

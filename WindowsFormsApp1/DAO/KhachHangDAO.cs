@@ -20,28 +20,32 @@ namespace WindowsFormsApp1.DAO
 
         private KhachHangDAO() { }
 
-        public void DeleteKhachHangByFoodID(int id)
+        public bool InsertKhachHang(string name, string sodienthoai, string diachi, int idxe)
         {
-            DataProvider.Instance.ExecuteQuery("delete dbo.KhachHang WHERE idFood = " + id);
-        }
-        public List<KhachHang> GetListKhachHang(int id)
-        {
-            List<KhachHang> listKhachHang = new List<KhachHang>();
+            string query = string.Format("INSERT dbo.KhachHang ( hoten, diachi, sodienthoai, idXe)VALUES  ( N'{0}', N'{1}', N'{2}', {3})", name, sodienthoai, diachi, idxe);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
 
-            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.KhachHang WHERE idBill = " + id);
+            return result > 0;
+        }
+
+        public List<KhachHang> SearchKhachHangByName(string name)
+        {
+            List<KhachHang> list = new List<KhachHang>();
+
+            string query = string.Format("SELECT * FROM KhachHang where hoten like N'%{0}%'", name);
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
 
             foreach (DataRow item in data.Rows)
             {
-                KhachHang info = new KhachHang(item);
-                listKhachHang.Add(info);
+                KhachHang KhachHang = new KhachHang(item);
+                list.Add(KhachHang);
             }
 
-            return listKhachHang;
+            return list;
+
+
         }
 
-        public void InsertKhachHang(int idBill, int idFood, int count)
-        {
-            DataProvider.Instance.ExecuteNonQuery("USP_InsertKhachHang @idBill , @idFood , @count", new object[] { idBill, idFood, count });
-        }
     }
 }

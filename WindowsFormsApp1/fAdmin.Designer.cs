@@ -56,7 +56,6 @@
             this.panel25 = new System.Windows.Forms.Panel();
             this.txbPTID = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.tabKhuSuaChua = new System.Windows.Forms.TabPage();
             this.tabTaiKhoan = new System.Windows.Forms.TabPage();
             this.tabAdmin.SuspendLayout();
             this.tabPhuTung.SuspendLayout();
@@ -75,7 +74,6 @@
             // 
             this.tabAdmin.Controls.Add(this.tabBill);
             this.tabAdmin.Controls.Add(this.tabPhuTung);
-            this.tabAdmin.Controls.Add(this.tabKhuSuaChua);
             this.tabAdmin.Controls.Add(this.tabTaiKhoan);
             this.tabAdmin.Location = new System.Drawing.Point(0, 2);
             this.tabAdmin.Name = "tabAdmin";
@@ -126,6 +124,7 @@
             this.btnShowPT.TabIndex = 3;
             this.btnShowPT.Text = "Xem";
             this.btnShowPT.UseVisualStyleBackColor = true;
+            this.btnShowPT.Click += new System.EventHandler(this.BtnShowPT_Click);
             // 
             // btnEditPT
             // 
@@ -164,6 +163,7 @@
             this.dtgvPT.Name = "dtgvPT";
             this.dtgvPT.Size = new System.Drawing.Size(358, 332);
             this.dtgvPT.TabIndex = 5;
+            this.dtgvPT.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DtgvPT_CellContentClick);
             // 
             // panel4
             // 
@@ -189,6 +189,7 @@
             this.btnSearchPT.TabIndex = 1;
             this.btnSearchPT.Text = "Tìm Kiếm";
             this.btnSearchPT.UseVisualStyleBackColor = true;
+            this.btnSearchPT.Click += new System.EventHandler(this.BtnSearchPT_Click);
             // 
             // panel3
             // 
@@ -336,16 +337,6 @@
             this.label10.TabIndex = 0;
             this.label10.Text = "ID:";
             // 
-            // tabKhuSuaChua
-            // 
-            this.tabKhuSuaChua.Location = new System.Drawing.Point(4, 22);
-            this.tabKhuSuaChua.Name = "tabKhuSuaChua";
-            this.tabKhuSuaChua.Padding = new System.Windows.Forms.Padding(3);
-            this.tabKhuSuaChua.Size = new System.Drawing.Size(793, 425);
-            this.tabKhuSuaChua.TabIndex = 3;
-            this.tabKhuSuaChua.Text = "Khu sửa chữa";
-            this.tabKhuSuaChua.UseVisualStyleBackColor = true;
-            // 
             // tabTaiKhoan
             // 
             this.tabTaiKhoan.Location = new System.Drawing.Point(4, 22);
@@ -390,7 +381,6 @@
         private System.Windows.Forms.TabControl tabAdmin;
         private System.Windows.Forms.TabPage tabBill;
         private System.Windows.Forms.TabPage tabPhuTung;
-        private System.Windows.Forms.TabPage tabKhuSuaChua;
         private System.Windows.Forms.TabPage tabTaiKhoan;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnShowPT;

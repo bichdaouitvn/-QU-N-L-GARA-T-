@@ -47,6 +47,13 @@ namespace WindowsFormsApp1
             txbsoluong.DataBindings.Add(new Binding("Text", dtgvPT.DataSource, "count", true, DataSourceUpdateMode.Never));
         }
 
+        List<PhuTung> SearchPhuTungByName(string name)
+        {
+            List<PhuTung> listPhuTung = PhuTungDAO.Instance.SearchPhuTungByName(name);
+
+            return listPhuTung;
+        }
+
         private void BtnAddPT_Click(object sender, EventArgs e)
         {
             string name = txbPTName.Text;
@@ -160,6 +167,21 @@ namespace WindowsFormsApp1
         private void CbHangPT_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void DtgvPT_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void BtnShowPT_Click(object sender, EventArgs e)
+        {
+            LoadListPhuTung();
+        }
+
+        private void BtnSearchPT_Click(object sender, EventArgs e)
+        {
+            dtgvPT.DataSource = SearchPhuTungByName(txbSearchPT.Text);
         }
     }
 }

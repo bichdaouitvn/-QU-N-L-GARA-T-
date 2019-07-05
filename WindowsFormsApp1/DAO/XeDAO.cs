@@ -21,6 +21,13 @@ namespace WindowsFormsApp1.DAO
 
         private XeDAO() { }
 
+        public bool InsertXe(string name, int idhangxe, string bienso)
+        {
+            string query = string.Format("INSERT dbo.Xe ( tenxe, idHangXe, biensoxe)VALUES  ( N'{0}', {1}, N'{2}')", name, idhangxe, bienso);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
         public Xe Getidxebybienso(string biensoxe)
         {
             Xe xe = null;

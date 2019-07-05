@@ -15,7 +15,7 @@ CREATE TABLE HangXe
 (
 	id INT IDENTITY PRIMARY KEY,
 	tenxe NVARCHAR (50),
-	idHangXe INT NOT NULL ,
+	idHangXe INT ,
 	biensoxe NVARCHAR(100),
 
 	FOREIGN KEY (idHangXe) REFERENCES dbo.HangXe(id)
@@ -29,6 +29,7 @@ CREATE TABLE KhachHang
 	diachi NVARCHAR(100),
 	sodienthoai VARCHAR(15),
 	idXe INT NOT NULL,
+	status INT NOT NULL DEFAULT 0 -- 0=dang cho | 1 = da vao garage
 
 	FOREIGN KEY (idXe) REFERENCES dbo.Xe(id)
 )
@@ -97,12 +98,24 @@ begin
 end
 GO 
 
+create proc USP_GetAreaList
+as select * from dbo.KhuSuaChua
+go
+
+EXEC USP_GetAreaList
+
 INSERT dbo.KhuSuaChua (name )
 VALUES ( N'Khu 1')
 INSERT dbo.KhuSuaChua (name )
 VALUES ( N'Khu 2')
 INSERT dbo.KhuSuaChua (name )
 VALUES ( N'Khu 3')
+INSERT dbo.KhuSuaChua (name )
+VALUES ( N'Khu 4')
+INSERT dbo.KhuSuaChua (name )
+VALUES ( N'Khu 5')
+INSERT dbo.KhuSuaChua (name )
+VALUES ( N'Khu 6')
 GO
 
 INSERT dbo.HangXe(tenhangxe )
@@ -113,4 +126,6 @@ INSERT dbo.HangXe (tenhangxe )
 VALUES ( N'BMW')
 GO
 
-select * from Xe where Xe.idHangXe = 1
+DELETE FROM KhachHang
+DELETE FROM Xe
+

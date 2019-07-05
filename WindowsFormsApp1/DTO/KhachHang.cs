@@ -9,13 +9,14 @@ namespace WindowsFormsApp1.DTO
 {
     public class KhachHang
     {
-        public KhachHang(int id, string hoten, string sodienthoai, string diachi, int idXe)
+        public KhachHang(int id, string hoten, string sodienthoai, string diachi, int idXe, int status)
         {
             this.Id = id;
             this.Hoten = hoten;
             this.Sodienthoai = sodienthoai;
             this.Diachi = diachi;
             this.IdXe = idXe;
+            this.Status = status;
         }
 
         public KhachHang(DataRow row)
@@ -25,6 +26,7 @@ namespace WindowsFormsApp1.DTO
             this.Sodienthoai  = row["sodienthoai"].ToString();
             this.Diachi = row["diachi"].ToString();
             this.IdXe = (int)row["idxe"];
+            this.Status = (int)row["status"];
         }
 
         private int id;
@@ -32,10 +34,13 @@ namespace WindowsFormsApp1.DTO
         private string sodienthoai;
         private string diachi;
         private int idXe;
+        private int status;
+
         public string Hoten { get => hoten; set => hoten = value; }
         public string Diachi { get => diachi; set => diachi = value; }
         public string Sodienthoai { get => sodienthoai; set => sodienthoai = value; }
         public int IdXe { get => idXe; set => idXe = value; }
         public int Id { get => id; set => id = value; }
+        public int Status { get => status; set => status = value; }
     }
 }
