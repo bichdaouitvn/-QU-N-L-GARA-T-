@@ -270,6 +270,7 @@
             this.cbHangPT.Name = "cbHangPT";
             this.cbHangPT.Size = new System.Drawing.Size(167, 21);
             this.cbHangPT.TabIndex = 1;
+            this.cbHangPT.SelectedIndexChanged += new System.EventHandler(this.CbHangPT_SelectedIndexChanged);
             // 
             // label2
             // 

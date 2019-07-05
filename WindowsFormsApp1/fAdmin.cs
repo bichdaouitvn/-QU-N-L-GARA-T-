@@ -156,5 +156,10 @@ namespace WindowsFormsApp1
             }
             catch { }
         }
+
+        private void CbHangPT_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

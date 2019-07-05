@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp1.DAO;
+using WindowsFormsApp1.DTO;
 
 namespace WindowsFormsApp1
 {
@@ -15,6 +17,18 @@ namespace WindowsFormsApp1
         public fManager()
         {
             InitializeComponent();
+            LoadData();
+        }
+        
+        void LoadData()
+        {
+            LoadHangXeIntoCombobox(cbHangXe);
+        }
+
+        void LoadHangXeIntoCombobox(ComboBox cb)
+        {
+            cb.DataSource = HangXeDAO.Instance.GetListHangXe();
+            cb.DisplayMember = "Tenhangxe";
         }
 
         private void AdminToolStripMenuItem_Click(object sender, EventArgs e)
@@ -22,5 +36,7 @@ namespace WindowsFormsApp1
             fAdmin f = new fAdmin();
             f.ShowDialog();
         }
+
+  
     }
 }

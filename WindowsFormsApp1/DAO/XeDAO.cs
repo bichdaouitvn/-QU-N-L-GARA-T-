@@ -21,5 +21,22 @@ namespace WindowsFormsApp1.DAO
 
         private XeDAO() { }
 
+        public Xe Getidxebybienso(string biensoxe)
+        {
+            Xe xe = null;
+
+            string query = string.Format("select * from Xe where Xe.biensoxe = N'{0}'", biensoxe);
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+            foreach (DataRow item in data.Rows)
+            {
+                xe = new Xe(item);
+                return xe;
+            }
+
+            return xe;
+        }
+
     }
 }

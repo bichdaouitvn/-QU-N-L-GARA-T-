@@ -50,14 +50,17 @@
     <Compile Include="DAO\BillInfoDAO.cs" />
     <Compile Include="DAO\DataProvider.cs" />
     <Compile Include="DAO\HangXeDAO.cs" />
+    <Compile Include="DAO\HoaDonDAO.cs" />
     <Compile Include="DAO\KhachHangDAO.cs" />
     <Compile Include="DAO\PhuTungDAO.cs" />
     <Compile Include="DAO\XeDAO.cs" />
     <Compile Include="DTO\Account.cs" />
     <Compile Include="DTO\BillInfo.cs" />
     <Compile Include="DTO\HangXe.cs" />
+    <Compile Include="DTO\HoaDon.cs" />
     <Compile Include="DTO\KhachHang.cs" />
     <Compile Include="DTO\PhuTung.cs" />
+    <Compile Include="DTO\ThongTinHoaDon.cs" />
     <Compile Include="DTO\Xe.cs" />
     <Compile Include="fAdmin.cs">
       <SubType>Form</SubType>
