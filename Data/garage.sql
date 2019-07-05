@@ -59,9 +59,11 @@ CREATE TABLE HoaDon
 	DateCheckIn DATE NOT NULL DEFAULT GETDATE(),
 	DateCheckOut DATE,
 	idKhuSuaChua INT NOT NULL,
+	idKhachHang int NOT NULL,
 	status INT NOT NULL DEFAULT 0 -- 1: da thanh toan && 0: chua thanh toan
 	
-	FOREIGN KEY (idKhuSuaChua) REFERENCES dbo.KhuSuaChua(id)
+	FOREIGN KEY (idKhuSuaChua) REFERENCES dbo.KhuSuaChua(id),
+	FOREIGN KEY (idKhachHang) REFERENCES dbo.KhachHang(id)
 )
 
 CREATE TABLE ThongTinHoaDon
@@ -69,6 +71,7 @@ CREATE TABLE ThongTinHoaDon
 	id INT IDENTITY PRIMARY KEY,
 	idHoaDon INT NOT NULL,
 	idPhuTung INT NOT NULL,
+	COUNT INT NOT NULL DEFAULT 0
 	
 	FOREIGN KEY (idHoaDon) REFERENCES dbo.HoaDon(id),
 	FOREIGN KEY (idPhuTung) REFERENCES dbo.PhuTung(id)
@@ -84,14 +87,6 @@ CREATE TABLE AccountG
 GO
 
 insert into dbo.AccountG values (N'manager',N'mng',N'12345',1)
-GO
-
-create proc USP_GetAccountByUserName
-@username nvarchar(100)
-as
-begin
- select * from dbo.AccountG where UserName=@username
-end 
 GO
 
 create proc USP_LoginG
