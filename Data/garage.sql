@@ -50,7 +50,7 @@ CREATE TABLE KhuSuaChua
 (
 	id INT IDENTITY PRIMARY KEY,
 	name NVARCHAR(100) NOT NULL DEFAULT N'Insert name',
-	status NVARCHAR(100) NOT NULL DEFAULT N'Empty'	-- 0:trong || 1:dang lam viec
+	status NVARCHAR(100) NOT NULL DEFAULT N'AVAILABLE'	-- 0:trong || 1:dang lam viec
 )
 
 CREATE TABLE HoaDon 	
@@ -59,7 +59,8 @@ CREATE TABLE HoaDon
 	DateCheckIn DATE NOT NULL DEFAULT GETDATE(),
 	DateCheckOut DATE,
 	idKhuSuaChua INT NOT NULL,
-	status INT NOT NULL DEFAULT 0 -- 1: da thanh toan && 0: chua thanh toan
+	status INT NOT NULL DEFAULT 0, -- 1: da thanh toan && 0: chua thanh toan
+	totalPrice float 
 	
 	FOREIGN KEY (idKhuSuaChua) REFERENCES dbo.KhuSuaChua(id),
 )
@@ -214,5 +215,71 @@ BEGIN
           @count  -- count - int
           )
 	END
+END
+GO
+
+CREATE TRIGGER UTG_UpdateThongTinHoaDon
+ON dbo.ThongTinHoaDon FOR INSERT, UPDATE
+AS
+BEGIN
+	DECLARE @idBill INT
+	
+	SELECT @idBill = idHoaDon FROM Inserted
+	
+	DECLARE @idTable INT
+	
+	SELECT @idTable = idKhuSuaChua FROM dbo.HoaDon WHERE id = @idBill AND status = 0
+	
+	UPDATE dbo.KhuSuaChua SET status = N'Working' WHERE id = @idTable
+END
+GO
+
+CREATE TRIGGER UTG_UpdateHoaDon
+ON dbo.HoaDon FOR UPDATE
+AS
+BEGIN
+	DECLARE @idBill INT
+	
+	SELECT @idBill = id FROM Inserted	
+	
+	DECLARE @idTable INT
+	
+	SELECT @idTable = idKhuSuaChua FROM dbo.HoaDon WHERE id = @idBill
+	
+	DECLARE @count int = 0
+	
+	SELECT @count = COUNT(*) FROM dbo.HoaDon WHERE idKhuSuaChua = @idTable AND status = 0
+	
+	IF (@count = 0)
+		UPDATE dbo.KhuSuaChua SET status = N'Available' WHERE id = @idTable
+END
+GO
+
+UPDATE dbo.KhachHang SET status = 1  
+WHERE KhachHang.id IN
+(SELECT *
+FROM [dbo].[KhachHang] inner join [dbo].[Xe] on KhachHang.idXe = Xe.id 
+WHERE xe.biensoxe = 'asdasd' )
+
+UPDATE [dbo].[KhachHang]  
+SET [dbo].[KhachHang].[status] = 1  
+WHERE sodienthoai = 'abc'
+
+
+
+
+SELECT KhachHang.hoten as N'Họ tên', KhachHang.diachi as N'Địa chỉ', KhachHang.sodienthoai as N'Số điện thoại', Xe.tenxe as N'Tên xe', Xe.biensoxe as N'Biển số xe', HangXe.tenhangxe as N'Hãng xe' 
+FROM[dbo].[KhachHang] inner join[dbo].[Xe] on KhachHang.idXe = Xe.id inner join[dbo].[HangXe] on Xe.idHangXe = HangXe.id 
+WHERE KhachHang.status =0
+go
+
+CREATE PROC [dbo].[USP_GetListBillByDate]
+@checkIn date, @checkOut date
+AS 
+BEGIN
+	SELECT t.name AS [Tên khu], b.totalPrice AS [Tổng tiền], DateCheckIn AS [Ngày vào], DateCheckOut AS [Ngày ra]
+	FROM dbo.HoaDon AS b,dbo.KhuSuaChua AS t
+	WHERE DateCheckIn >= @checkIn AND DateCheckOut <= @checkOut AND b.status = 1
+	AND t.id = b.idKhuSuaChua
 END
 GO

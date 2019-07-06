@@ -53,8 +53,12 @@
             this.panel25 = new System.Windows.Forms.Panel();
             this.txbPTID = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.tabTaiKhoan = new System.Windows.Forms.TabPage();
+            this.DTP1 = new System.Windows.Forms.DateTimePicker();
+            this.DTP2 = new System.Windows.Forms.DateTimePicker();
+            this.dtgvdt = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabAdmin.SuspendLayout();
+            this.tabBill.SuspendLayout();
             this.tabPhuTung.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvPT)).BeginInit();
@@ -64,25 +68,29 @@
             this.panel6.SuspendLayout();
             this.panel24.SuspendLayout();
             this.panel25.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgvdt)).BeginInit();
             this.SuspendLayout();
             // 
             // tabAdmin
             // 
             this.tabAdmin.Controls.Add(this.tabBill);
             this.tabAdmin.Controls.Add(this.tabPhuTung);
-            this.tabAdmin.Controls.Add(this.tabTaiKhoan);
             this.tabAdmin.Location = new System.Drawing.Point(0, 2);
             this.tabAdmin.Name = "tabAdmin";
             this.tabAdmin.SelectedIndex = 0;
-            this.tabAdmin.Size = new System.Drawing.Size(801, 451);
+            this.tabAdmin.Size = new System.Drawing.Size(760, 532);
             this.tabAdmin.TabIndex = 0;
             // 
             // tabBill
             // 
+            this.tabBill.Controls.Add(this.button1);
+            this.tabBill.Controls.Add(this.dtgvdt);
+            this.tabBill.Controls.Add(this.DTP2);
+            this.tabBill.Controls.Add(this.DTP1);
             this.tabBill.Location = new System.Drawing.Point(4, 22);
             this.tabBill.Name = "tabBill";
             this.tabBill.Padding = new System.Windows.Forms.Padding(3);
-            this.tabBill.Size = new System.Drawing.Size(793, 425);
+            this.tabBill.Size = new System.Drawing.Size(752, 506);
             this.tabBill.TabIndex = 0;
             this.tabBill.Text = "Doanh thu";
             this.tabBill.UseVisualStyleBackColor = true;
@@ -96,7 +104,7 @@
             this.tabPhuTung.Location = new System.Drawing.Point(4, 22);
             this.tabPhuTung.Name = "tabPhuTung";
             this.tabPhuTung.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPhuTung.Size = new System.Drawing.Size(793, 425);
+            this.tabPhuTung.Size = new System.Drawing.Size(752, 506);
             this.tabPhuTung.TabIndex = 1;
             this.tabPhuTung.Text = "Phụ tùng";
             this.tabPhuTung.UseVisualStyleBackColor = true;
@@ -175,14 +183,14 @@
             this.txbSearchPT.Location = new System.Drawing.Point(4, 17);
             this.txbSearchPT.Name = "txbSearchPT";
             this.txbSearchPT.Size = new System.Drawing.Size(176, 20);
-            this.txbSearchPT.TabIndex = 2;
+            this.txbSearchPT.TabIndex = 4;
             // 
             // btnSearchPT
             // 
             this.btnSearchPT.Location = new System.Drawing.Point(186, 5);
             this.btnSearchPT.Name = "btnSearchPT";
             this.btnSearchPT.Size = new System.Drawing.Size(75, 47);
-            this.btnSearchPT.TabIndex = 1;
+            this.btnSearchPT.TabIndex = 5;
             this.btnSearchPT.Text = "Tìm Kiếm";
             this.btnSearchPT.UseVisualStyleBackColor = true;
             this.btnSearchPT.Click += new System.EventHandler(this.BtnSearchPT_Click);
@@ -212,7 +220,7 @@
             this.txbPrice.Location = new System.Drawing.Point(102, 12);
             this.txbPrice.Name = "txbPrice";
             this.txbPrice.Size = new System.Drawing.Size(167, 20);
-            this.txbPrice.TabIndex = 1;
+            this.txbPrice.TabIndex = 9;
             // 
             // label1
             // 
@@ -239,7 +247,7 @@
             this.cbHangPT.Location = new System.Drawing.Point(104, 13);
             this.cbHangPT.Name = "cbHangPT";
             this.cbHangPT.Size = new System.Drawing.Size(167, 21);
-            this.cbHangPT.TabIndex = 1;
+            this.cbHangPT.TabIndex = 7;
             this.cbHangPT.SelectedIndexChanged += new System.EventHandler(this.CbHangPT_SelectedIndexChanged);
             // 
             // label2
@@ -266,7 +274,7 @@
             this.txbPTName.Location = new System.Drawing.Point(102, 12);
             this.txbPTName.Name = "txbPTName";
             this.txbPTName.Size = new System.Drawing.Size(167, 20);
-            this.txbPTName.TabIndex = 1;
+            this.txbPTName.TabIndex = 6;
             // 
             // label9
             // 
@@ -293,7 +301,7 @@
             this.txbPTID.Name = "txbPTID";
             this.txbPTID.ReadOnly = true;
             this.txbPTID.Size = new System.Drawing.Size(167, 20);
-            this.txbPTID.TabIndex = 1;
+            this.txbPTID.TabIndex = 0;
             this.txbPTID.TextChanged += new System.EventHandler(this.TxbPTID_TextChanged_1);
             // 
             // label10
@@ -306,25 +314,49 @@
             this.label10.TabIndex = 0;
             this.label10.Text = "ID:";
             // 
-            // tabTaiKhoan
+            // DTP1
             // 
-            this.tabTaiKhoan.Location = new System.Drawing.Point(4, 22);
-            this.tabTaiKhoan.Name = "tabTaiKhoan";
-            this.tabTaiKhoan.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTaiKhoan.Size = new System.Drawing.Size(793, 425);
-            this.tabTaiKhoan.TabIndex = 4;
-            this.tabTaiKhoan.Text = "Tài Khoản";
-            this.tabTaiKhoan.UseVisualStyleBackColor = true;
+            this.DTP1.Location = new System.Drawing.Point(0, 3);
+            this.DTP1.Name = "DTP1";
+            this.DTP1.Size = new System.Drawing.Size(200, 20);
+            this.DTP1.TabIndex = 0;
+            // 
+            // DTP2
+            // 
+            this.DTP2.Location = new System.Drawing.Point(254, 3);
+            this.DTP2.Name = "DTP2";
+            this.DTP2.Size = new System.Drawing.Size(200, 20);
+            this.DTP2.TabIndex = 1;
+            // 
+            // dtgvdt
+            // 
+            this.dtgvdt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgvdt.Location = new System.Drawing.Point(0, 85);
+            this.dtgvdt.Name = "dtgvdt";
+            this.dtgvdt.Size = new System.Drawing.Size(755, 406);
+            this.dtgvdt.TabIndex = 3;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(3, 29);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(118, 36);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Xem";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // fAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(707, 450);
+            this.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.tải_xuống;
+            this.ClientSize = new System.Drawing.Size(759, 527);
             this.Controls.Add(this.tabAdmin);
             this.Name = "fAdmin";
             this.Text = "fAdmin";
+            this.Load += new System.EventHandler(this.FAdmin_Load);
             this.tabAdmin.ResumeLayout(false);
+            this.tabBill.ResumeLayout(false);
             this.tabPhuTung.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgvPT)).EndInit();
@@ -339,6 +371,7 @@
             this.panel24.PerformLayout();
             this.panel25.ResumeLayout(false);
             this.panel25.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgvdt)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -348,7 +381,6 @@
         private System.Windows.Forms.TabControl tabAdmin;
         private System.Windows.Forms.TabPage tabBill;
         private System.Windows.Forms.TabPage tabPhuTung;
-        private System.Windows.Forms.TabPage tabTaiKhoan;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnShowPT;
         private System.Windows.Forms.Button btnEditPT;
@@ -371,5 +403,9 @@
         private System.Windows.Forms.TextBox txbPrice;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txbPTName;
+        private System.Windows.Forms.DataGridView dtgvdt;
+        private System.Windows.Forms.DateTimePicker DTP2;
+        private System.Windows.Forms.DateTimePicker DTP1;
+        private System.Windows.Forms.Button button1;
     }
 }

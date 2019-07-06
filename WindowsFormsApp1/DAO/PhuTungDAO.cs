@@ -54,7 +54,7 @@ namespace WindowsFormsApp1.DAO
 
         public bool InsertPhuTung(string name, int id, float gia)
         {
-            string query = string.Format("INSERT dbo.PhuTung ( tenphutung, idHangXe, count, price)VALUES  ( N'{0}', {1}, {2})", name, id, gia);
+            string query = string.Format("INSERT dbo.PhuTung ( tenphutung, idHangXe, price)VALUES  ( N'{0}', {1}, {2})", name, id, gia);
             int result = DataProvider.Instance.ExecuteNonQuery(query);
 
             return result > 0;

@@ -47,5 +47,16 @@ namespace WindowsFormsApp1.DAO
 
         }
 
+        public bool UpdateStatus(string sdt)
+        {
+            string query = string.Format("UPDATE [dbo].[KhachHang] SET[dbo].[KhachHang].[status] = 1 WHERE sodienthoai = N'{0}'", sdt);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
+
+  
+
+
     }
 }

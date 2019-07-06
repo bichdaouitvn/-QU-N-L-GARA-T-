@@ -45,7 +45,7 @@ namespace WindowsFormsApp1
                 btn.Tag = item;
                 switch(item.Status)
                 {
-                    case "Empty":
+                    case "AVAILABLE":
                         btn.BackColor = Color.Azure;
                         break;
                     default:
@@ -190,7 +190,7 @@ namespace WindowsFormsApp1
 
                 if (area == null)
                 {
-                    MessageBox.Show("Hãy chọn bàn");
+                    MessageBox.Show("Hãy chọn khu");
                     return;
                 }
 
@@ -212,6 +212,34 @@ namespace WindowsFormsApp1
 
                 LoadArea();
             }
-        
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            Area area = lsv.Tag as Area;
+
+            int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(area.Id);
+
+            double totalPrice = Convert.ToDouble(txbTotalPrice.Text.Split(',')[0]);
+            double finalTotalPrice = totalPrice;
+
+            if (idBill != -1)
+            {
+                if (MessageBox.Show(string.Format("Bạn có chắc thanh toán hóa đơn cho khu : {0}\nTổng tiền \n=> {1} ", area.Name, finalTotalPrice), "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+                {
+                    BillDAO.Instance.CheckOut(idBill, (float)finalTotalPrice);
+                    ShowBill(area.Id);
+
+                    LoadArea();
+                }
+            }
+            string sdt = txbsdtt.Text;
+            KhachHangDAO.Instance.UpdateStatus(sdt);
+            LoadListKhachHang();
+        }
+
+        private void FManager_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

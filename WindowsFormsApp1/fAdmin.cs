@@ -17,6 +17,19 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             LoadData();
+            LoadDateTimePickerBill();
+            LoadListBillByDate(DTP1.Value, DTP2.Value);
+        }
+
+        void LoadDateTimePickerBill()
+        {
+            DateTime today = DateTime.Now;
+            DTP1.Value = new DateTime(today.Year, today.Month, 1);
+            DTP2.Value = DTP1.Value.AddMonths(1).AddDays(-1);
+        }
+        void LoadListBillByDate(DateTime checkIn, DateTime checkOut)
+        {
+            dtgvdt.DataSource = BillDAO.Instance.GetBillListByDate(checkIn, checkOut);
         }
 
         void LoadData()
@@ -179,6 +192,11 @@ namespace WindowsFormsApp1
         private void BtnSearchPT_Click(object sender, EventArgs e)
         {
             dtgvPT.DataSource = SearchPhuTungByName(txbSearchPT.Text);
+        }
+
+        private void FAdmin_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
